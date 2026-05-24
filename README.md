@@ -1,4 +1,4 @@
-# Maneuver — "Talk to Founder" Voice AI Agent
+# Maneuver - "Talk to Founder" Voice AI Agent
 
 A real-time voice web app where visitors can have a natural conversation with an AI representing Maneuver's founder. The agent runs discovery calls, answers questions about Maneuver, and renders synchronized visual content on the frontend while speaking.
 
@@ -6,7 +6,7 @@ A real-time voice web app where visitors can have a natural conversation with an
 
 - Visitor lands on the page → clicks "Start Conversation"
 - AI introduces itself as Jordan (Maneuver's founder)
-- Discovery questions flow naturally — name, company, problem, timeline, budget
+- Discovery questions flow naturally:  name, company, problem, timeline, budget
 - Fields populate live on the left panel as the user answers
 - If the user asks "what services do you offer?" → service cards appear instantly
 - If the user asks "how does your process work?" → a 5-step diagram slides in
@@ -25,8 +25,8 @@ A real-time voice web app where visitors can have a natural conversation with an
 ### 1. Clone and configure
 
 ```bash
-git clone https://github.com/your-username/maneuver-voice-agent
-cd maneuver-voice-agent
+git clone https://github.com/Rehxn2k06/Founder_AI
+cd agent
 cp .env.example .env
 # Fill in your API keys in .env
 ```
@@ -63,7 +63,7 @@ Open `http://localhost:5173` in your browser.
 | `LIVEKIT_URL` | [LiveKit Cloud](https://cloud.livekit.io) → Project → Settings |
 | `LIVEKIT_API_KEY` | LiveKit Cloud → API Keys |
 | `LIVEKIT_API_SECRET` | LiveKit Cloud → API Keys |
-| `GOOGLE_API_KEY` | [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey) — **free tier, no CC required** |
+| `GOOGLE_API_KEY` | [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey) - **free tier, no CC required** |
 | `DEEPGRAM_API_KEY` | [console.deepgram.com](https://console.deepgram.com) |
 | `CARTESIA_API_KEY` | [play.cartesia.ai](https://play.cartesia.ai) |
 
@@ -86,24 +86,24 @@ Open `http://localhost:5173` in your browser.
 
 ## Model Choices & Why
 
-### STT — Deepgram Nova-3
+### STT : Deepgram Nova-3
 - **~300ms latency** end-to-end, best in class for live voice
 - Highly accurate for accented English and technical jargon
 - LiveKit plugin is first-class
 
-### LLM — Google Gemini 2.0 Flash
-- **Completely free tier** — 15 requests/minute, 1M tokens/day, no credit card required
+### LLM : Google Gemini 2.0 Flash
+- **Completely free tier** - 15 requests/minute, 1M tokens/day, no credit card required
 - Get your API key in 30 seconds at [aistudio.google.com](https://aistudio.google.com/app/apikey)
-- Native tool/function calling — essential for the visual layer (the LLM decides when to call `show_services_slide`, etc.)
+- Native tool/function calling - essential for the visual layer (the LLM decides when to call `show_services_slide`, etc.)
 - Strong at natural, branching conversation without sounding scripted
 - Slightly higher latency than GPT-4o (~1-2s TTFT) but more than acceptable for voice demos
 
-### TTS — Cartesia Sonic
-- **~90ms latency** — feels instantaneous, makes conversations feel real
+### TTS : Cartesia Sonic
+- **~90ms latency** - feels instantaneous, makes conversations feel real
 - Very natural prosody for conversational speech
 - If you don't have a Cartesia key, the agent falls back to OpenAI TTS
 
-### Framework — LiveKit Agents (Python)
+### Framework : LiveKit Agents (Python)
 - Required by the assignment
 - Python SDK is more mature than Node.js for custom agent logic
 - Built-in VAD (Silero), turn detection, interruption handling
@@ -115,7 +115,7 @@ Open `http://localhost:5173` in your browser.
 ```
 maneuver-voice-agent/
 ├── agent/
-│   ├── main.py          # Entry point — joins room, greets visitor
+│   ├── main.py          # Entry point - joins room, greets visitor
 │   ├── agent.py         # STT/LLM/TTS pipeline, system prompt, RPC sender
 │   ├── tools.py         # LLM tool definitions (visual + lead capture)
 │   ├── lead_store.py    # Lead capture & JSON persistence
@@ -145,13 +145,13 @@ maneuver-voice-agent/
 
 ## What I'd Do With Another Week
 
-1. **Multi-agent handoff** — when the user is ready to book a follow-up, hand off to a scheduling agent that checks a calendar and sends a Calendly link
-2. **Admin dashboard** — a `/admin` page showing past calls, lead data, and conversation replays
-3. **Slack notification** — POST to a Slack webhook at call end with the captured lead data
-4. **Streaming transcript** — show live captions synchronized with the audio
-5. **Voice avatars** — animated AI avatar that lip-syncs with TTS output (using Heygen or D-ID)
-6. **Better interruption UX** — visual feedback when the user interrupts (current: graceful audio cutoff)
-7. **Phone number support** — LiveKit SIP integration so people can call in from a real phone
+1. **Multi-agent handoff** - when the user is ready to book a follow-up, hand off to a scheduling agent that checks a calendar and sends a Calendly link
+2. **Admin dashboard** - a `/admin` page showing past calls, lead data, and conversation replays
+3. **Slack notification** - POST to a Slack webhook at call end with the captured lead data
+4. **Streaming transcript** - show live captions synchronized with the audio
+5. **Voice avatars** - animated AI avatar that lip-syncs with TTS output (using Heygen or D-ID)
+6. **Better interruption UX** - visual feedback when the user interrupts (current: graceful audio cutoff)
+7. **Phone number support** - LiveKit SIP integration so people can call in from a real phone
 
 ---
 
