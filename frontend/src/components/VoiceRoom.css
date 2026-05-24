@@ -1,0 +1,106 @@
+.livekit-room {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.room-layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 0;
+  overflow: hidden;
+  padding: 16px;
+  padding-bottom: 0;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.room-sidebar {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.room-main {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+}
+
+/* ─── Status Bar ─── */
+.room-statusbar {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  border-top: 1px solid var(--border-subtle);
+  background: rgba(8, 11, 20, 0.7);
+  backdrop-filter: blur(12px);
+  position: relative;
+  z-index: 2;
+  margin-top: 16px;
+}
+
+.room-statusbar__left,
+.room-statusbar__right {
+  flex: 1;
+}
+
+.room-statusbar__right {
+  text-align: right;
+}
+
+.maneuver-badge {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.maneuver-badge__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  box-shadow: 0 0 8px var(--accent-green);
+  animation: pulse-ring 2s ease-in-out infinite;
+}
+
+.statusbar-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ─── Error Boundary ─── */
+.room-error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 24px 28px;
+  max-width: 420px;
+  font-size: 0.9rem;
+  color: var(--accent-red);
+  border-color: rgba(248, 113, 113, 0.3);
+}
+
+.room-error span { font-size: 1.5rem; flex-shrink: 0; }
+.room-error strong { display: block; margin-bottom: 4px; }
+.room-error p { color: var(--text-secondary); font-size: 0.82rem; }

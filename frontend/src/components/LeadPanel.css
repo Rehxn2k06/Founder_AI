@@ -1,0 +1,124 @@
+.lead-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.lead-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lead-panel__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lead-panel__title h3 {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.lead-panel__icon {
+  font-size: 1rem;
+}
+
+.lead-panel__count {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  background: rgba(79, 158, 255, 0.12);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+.lead-panel__progress {
+  height: 4px;
+  background: var(--border-subtle);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.lead-panel__progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-green));
+  border-radius: 2px;
+  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.lead-panel__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* ─── Individual Field ─── */
+.lead-field {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  transition: all 0.35s ease;
+}
+
+.lead-field--empty {
+  opacity: 0.4;
+}
+
+.lead-field--filled {
+  background: rgba(79, 158, 255, 0.06);
+  border-color: rgba(79, 158, 255, 0.2);
+  animation: slide-in-right 0.4s ease;
+}
+
+.lead-field__icon {
+  font-size: 0.85rem;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+
+.lead-field__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.lead-field__label {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.lead-field__value {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  word-break: break-word;
+}
+
+.lead-field__placeholder {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.lead-field__check {
+  color: var(--accent-green);
+  font-size: 0.8rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}

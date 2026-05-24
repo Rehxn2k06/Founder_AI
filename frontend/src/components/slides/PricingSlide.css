@@ -1,0 +1,125 @@
+.pricing-slide {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeInUp 0.4s ease;
+}
+
+.pricing-slide__header { text-align: center; }
+
+.pricing-slide__eyebrow {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent-primary);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.pricing-slide__title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.pricing-slide__sub {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  flex: 1;
+}
+
+.pricing-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 16px;
+  border-top: 2px solid var(--plan-color, var(--accent-primary));
+  transition: transform 0.2s ease;
+  animation: fadeInUp 0.4s ease both;
+}
+
+.pricing-card:hover {
+  transform: translateY(-4px);
+}
+
+.pricing-card--featured {
+  background: rgba(79, 158, 255, 0.06);
+  border-color: var(--accent-primary);
+}
+
+.pricing-card__badge {
+  position: absolute;
+  top: -1px;
+  right: 12px;
+  background: var(--accent-primary);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 8px;
+  border-radius: 0 0 6px 6px;
+}
+
+.pricing-card__icon { font-size: 1.6rem; }
+
+.pricing-card__name {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.pricing-card__price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--plan-color, var(--accent-primary));
+}
+
+.pricing-card__timeline {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.pricing-card__desc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.pricing-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.pricing-tag {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+}
+
+.pricing-footer {
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.pricing-footer span { font-size: 1.2rem; }
