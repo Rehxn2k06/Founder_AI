@@ -6,11 +6,12 @@ LiveKit Agents v1.5+ API.
 from __future__ import annotations
 import json
 import logging
+import os
 from pathlib import Path
 
 from livekit import rtc
 from livekit.agents import Agent
-from livekit.plugins import google, deepgram, cartesia, silero
+from livekit.plugins import openai, deepgram, silero
 
 from lead_store import LeadStore
 from tools import build_tools
@@ -53,11 +54,11 @@ When answering about Maneuver, use the visual layer tools:
 - If they ask about a case study → call `show_case_study`
 
 **Tone and style:**
-- Talk like a founder, not a salesperson. You're curious, direct, and honest.
-- Keep responses short. You're having a conversation, not giving a speech.
-- It's okay to say "I don't know" or "that depends" — founders do that.
-- If someone is rude or aggressive, hold your ground calmly.
-- If someone goes silent for a while, gently re-engage: "Still there? Happy to wait."
+- Talk like a founder: curious, direct, and conversational.
+- ALWAYS respond with spoken text. You must NEVER stay silent. 
+- After the user speaks, acknowledge what they said and ALWAYS ask a follow-up question to keep the conversation moving.
+- If you call a tool (like update_lead_field), you MUST STILL speak a response to the user.
+- Keep responses short and natural.
 - End with warmth. When the conversation winds down, call `end_call` to save the lead.
 
 **Knowledge Base:**
@@ -74,15 +75,21 @@ class RPCSender:
         self._room = room
 
     async def __call__(self, method: str, payload: dict) -> None:
-        for participant in self._room.remote_participants.values():
+        participants = list(self._room.remote_participants.values())
+        logger.info(f"RPC [{method}] → {[p.identity for p in participants]} payload={payload}")
+        if not participants:
+            logger.warning(f"RPC [{method}] has NO remote participants to send to!")
+            return
+        for participant in participants:
             try:
                 await self._room.local_participant.perform_rpc(
                     destination_identity=participant.identity,
                     method=method,
                     payload=json.dumps(payload),
                 )
+                logger.info(f"RPC [{method}] sent OK to {participant.identity}")
             except Exception as e:
-                logger.warning(f"RPC send failed ({method}): {e}")
+                logger.warning(f"RPC send failed ({method}) to {participant.identity}: {e}")
 
 
 # ─── Agent Factory ───────────────────────────────────────────────────────────
@@ -95,8 +102,14 @@ def create_agent(room: rtc.Room, room_name: str) -> tuple[Agent, LeadStore]:
     agent = Agent(
         instructions=build_system_prompt(),
         stt=deepgram.STT(model="nova-3", language="en-US"),
-        llm=google.LLM(model="gemini-2.5-flash"),
-        tts=cartesia.TTS(),
+        llm=openai.LLM(
+            model="Meta-Llama-3.3-70B-Instruct",
+            base_url="https://api.sambanova.ai/v1",
+            api_key=os.environ.get("SAMBANOVA_API_KEY", ""),
+            parallel_tool_calls=False,
+            _strict_tool_schema=False
+        ),
+        tts=deepgram.TTS(),
         vad=silero.VAD.load(min_silence_duration=1.2),
         tools=tools,
         allow_interruptions=True,

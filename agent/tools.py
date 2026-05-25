@@ -14,19 +14,19 @@ def build_tools(lead_store, rpc_sender) -> list:
 
     # ─── Visual Layer Tools ──────────────────────────────────────────────────
 
-    @llm.function_tool(description="Show the overview slide listing all of Maneuver's services. Call this when the user asks what Maneuver does or what services are offered.")
+    @llm.function_tool(description="Show the overview slide listing all of Maneuver's services.")
     async def show_services_slide():
         """Show the services overview card grid on the frontend."""
         await rpc_sender("show_services_slide", {})
         return "Services slide displayed."
 
-    @llm.function_tool(description="Zoom into the detail view for a specific Maneuver service. service_name must be one of: 'Product Sprint', 'Design Sprint', 'Fractional CTO', 'Scale & Iteration'.")
+    @llm.function_tool(description="Show detail view for a specific Maneuver service. service_name must be one of: 'Product Sprint', 'Design Sprint', 'Fractional CTO', 'Scale & Iteration'.")
     async def show_service_detail(service_name: str):
         """Show detailed information card for a specific service."""
         await rpc_sender("show_service_detail", {"service": service_name})
         return f"Service detail for {service_name} displayed."
 
-    @llm.function_tool(description="Show Maneuver's delivery process as a visual step diagram. Call this when the user asks about the process, how we work, or how a project runs.")
+    @llm.function_tool(description="Show Maneuver's delivery process as a visual step diagram.")
     async def show_process_diagram():
         """Trigger the process step diagram on the frontend."""
         await rpc_sender("show_process_diagram", {})
@@ -38,7 +38,7 @@ def build_tools(lead_store, rpc_sender) -> list:
         await rpc_sender("show_case_study", {"client": client_name})
         return f"Case study for {client_name} displayed."
 
-    @llm.function_tool(description="Show the pricing overview slide when the user asks about cost, pricing, or budget ranges.")
+    @llm.function_tool(description="Show the pricing overview slide.")
     async def show_pricing_slide():
         """Show pricing overview on the frontend."""
         await rpc_sender("show_pricing_slide", {})
@@ -48,10 +48,9 @@ def build_tools(lead_store, rpc_sender) -> list:
 
     @llm.function_tool(
         description=(
-            "Update a specific field in the lead/discovery record as you learn information. "
-            "Call this as soon as you learn a piece of info — don't wait for the end. "
-            "field must be one of: name, company, role, problem, current_solution, timeline, budget, team_size, stage, notes. "
-            "value is what the user said."
+            "Save a piece of information learned about the visitor. "
+            "The 'field' argument MUST be exactly one of: name, company, role, problem, current_solution, timeline, budget, team_size, stage, notes. "
+            "The 'value' argument is what the visitor said."
         )
     )
     async def update_lead_field(field: str, value: str):
@@ -60,7 +59,7 @@ def build_tools(lead_store, rpc_sender) -> list:
         await rpc_sender("update_lead_field", {"field": field, "value": value})
         return f"Captured {field}: {value}"
 
-    @llm.function_tool(description="Mark the discovery call as complete and trigger lead persistence. Call this when the conversation naturally wraps up or the user says goodbye.")
+    @llm.function_tool(description="Mark the discovery call as complete and save the lead. Call when the conversation wraps up.")
     async def end_call():
         """Finalize and save the lead record."""
         path = await lead_store.save()
