@@ -75,7 +75,7 @@ Open `http://localhost:5173` in your browser.
 |-------|--------|---------|
 | Voice Framework | LiveKit Agents (Python) | Required; Python SDK more mature |
 | STT | Deepgram Nova-3 | Best latency, highly accurate |
-| LLM | **Google Gemini 2.0 Flash** | **Free tier** (15 RPM, no CC); native tool calling |
+| LLM | **Meta-Llama-3.3-70B-Instruct** | **Free tier** (~30k toekns/min); native tool calling |
 | TTS | Cartesia Sonic | ~90ms latency, very natural |
 | Frontend | React + Vite | Recommended in assignment |
 | LiveKit UI | `@livekit/components-react` | Official SDK |
@@ -91,9 +91,9 @@ Open `http://localhost:5173` in your browser.
 - Highly accurate for accented English and technical jargon
 - LiveKit plugin is first-class
 
-### LLM : Google Gemini 2.0 Flash
-- **Completely free tier** - 15 requests/minute, 1M tokens/day, no credit card required
-- Get your API key in 30 seconds at [aistudio.google.com](https://aistudio.google.com/app/apikey)
+### LLM : Meta-Llama-3.3-70B-Instruct
+- **Completely free tier** - ~30k tokens/min no credit card required
+- Get your API key in 30 seconds at [sambanova.ai](https://cloud.sambanova.ai/)
 - Native tool/function calling - essential for the visual layer (the LLM decides when to call `show_services_slide`, etc.)
 - Strong at natural, branching conversation without sounding scripted
 - Slightly higher latency than GPT-4o (~1-2s TTFT) but more than acceptable for voice demos
