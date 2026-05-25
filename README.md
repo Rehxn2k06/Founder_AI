@@ -63,7 +63,7 @@ Open `http://localhost:5173` in your browser.
 | `LIVEKIT_URL` | [LiveKit Cloud](https://cloud.livekit.io) → Project → Settings |
 | `LIVEKIT_API_KEY` | LiveKit Cloud → API Keys |
 | `LIVEKIT_API_SECRET` | LiveKit Cloud → API Keys |
-| `GOOGLE_API_KEY` | [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey) - **free tier, no CC required** |
+| `SAMBANOVA API KEY` | [sambanova.ai](https://cloud.sambanova.ai/) - **free tier, no CC required** |
 | `DEEPGRAM_API_KEY` | [console.deepgram.com](https://console.deepgram.com) |
 | `CARTESIA_API_KEY` | [play.cartesia.ai](https://play.cartesia.ai) |
 
